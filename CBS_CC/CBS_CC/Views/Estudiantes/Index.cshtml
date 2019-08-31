@@ -1,0 +1,120 @@
+﻿@model CBS_CC.Models.ViewModels.EstudianteListModel
+
+@{
+    ViewData["Title"] = "Estudiantes";
+    var sexo = Model.f_Sexo;
+}
+
+<div class="col-md-2">
+    <a asp-action="Save" class="btn btn-primary">Nuevo</a>
+</div>
+<div class="col-md-10 text-center">
+    <h2>Estudiantes</h2>
+</div>
+<form asp-action="Index">
+    <div class="row col-md-12">
+        <div class="row col-md-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Nombre:</label>
+                </div>
+                <input asp-for="f_Nombre" class="form-control" placeholder="Nombre del estudiante" />
+            </div>
+        </div>
+        <div class="row col-md-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Nombre:</label>
+                </div>
+                <select id="f_Sexo" name="f_Sexo" class="form-control" onchange="this.form.submit();">>
+                    <option value="">Todos</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+            </div>
+        </div>
+        <div class="row col-md-3">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Estado:</label>
+                </div>
+                <select asp-for="EstudianteEstadoId" class="form-control form-control-sm" asp-items="ViewBag.EstudianteEstadoId" onchange="this.form.submit();">
+                    <option value="-1">Todos</option>
+                </select>
+            </div>
+        </div>
+        <div class="row col-md-1">
+            <input type="submit" class="btn btn-primary btn-sm" value="Buscar" />
+        </div>
+    </div>
+</form>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes[0].CarnetNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes[0].CodigoMINED)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes[0].NombreCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes[0].FechaNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes[0].Edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes[0].Sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes[0].Responsable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes[0].Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes[0].EstudianteEstadoId)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Estudiantes)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Save" asp-route-id="@item.EstudianteId">@Html.DisplayFor(modelItem => item.CarnetNo)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoMINED)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sexo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Responsable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstudianteEstado.Descripcion)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    document.getElementById("f_Sexo").value = '@sexo';
+</script>

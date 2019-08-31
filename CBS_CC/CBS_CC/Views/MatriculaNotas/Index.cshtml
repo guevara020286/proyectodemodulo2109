@@ -1,0 +1,109 @@
+﻿@model CBS_CC.Models.ViewModels.MatriculaNotasViewModel
+
+@{
+    ViewData["Title"] = "Notas";
+}
+<div id="modal-placeholder"></div>
+<div class="col-md-10 text-center">
+    <h2>Notas</h2>
+</div>
+<form asp-action="Index">
+    <div class="row col-md-12">
+        <div class="row col-md-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Año lectivo:</label>
+                </div>
+                <input asp-for="f_PeriodoLectivo" class="form-control" placeholder="Año Lectivo" />
+            </div>
+        </div>
+        <div class="row col-md-4">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Nombre:</label>
+                </div>
+                <select asp-for="f_SeccionId" class="form-control form-control-sm" asp-items="ViewBag.SeccionId"></select>
+            </div>
+        </div>
+        <div class="row col-md-3">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Estado:</label>
+                </div>
+                <select asp-for="f_AsignaturaId" class="form-control form-control-sm" asp-items="ViewBag.AsignaturaId"></select>
+            </div>
+        </div>
+        <div class="row col-md-1">
+            <input type="submit" class="btn btn-primary btn-sm" value="Generar notas" />
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Estudiante</th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatriculaNotas[0].Asignatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatriculaNotas[0].ICorte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatriculaNotas[0].IICorte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatriculaNotas[0].ISemestre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatriculaNotas[0].IIICorte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatriculaNotas[0].IVCorte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatriculaNotas[0].IISemestre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatriculaNotas[0].NotaFinal)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MatriculaNotas)
+        {
+            <tr>
+                <td>
+                    <button type="button" data-toggle="modal" data-target="#editModal" data-url="@Url.Action("Save", "MatriculaNotas", new { id = item.MatriculaNotaId })">Editar</button>
+                </td>
+                <td>
+                    @Html.DisplayFor(modeItem => item.Matricula.Estudiante.EstudianteCombo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Asignatura.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ICorte)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IICorte)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISemestre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IIICorte)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IVCorte)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IISemestre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NotaFinal)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

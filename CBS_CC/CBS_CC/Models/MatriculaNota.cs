@@ -16,6 +16,7 @@ namespace CBS_CC.Models
         public Decimal IVCorte { get; set; }
         public Decimal IISemestre { get; set; }
         public Decimal NotaFinal { get; set; }
+        public int MatriculaId { get; set; }
 
         public Matricula Matricula { get; set; }
         public Asignatura Asignatura { get; set; }

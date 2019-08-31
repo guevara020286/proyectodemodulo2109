@@ -1,0 +1,66 @@
+﻿@model CBS_CC.Models.MatriculaNota
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>MatriculaNota</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ICorte)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ICorte)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IICorte)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IICorte)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ISemestre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ISemestre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IIICorte)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IIICorte)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IVCorte)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IVCorte)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IISemestre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IISemestre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NotaFinal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NotaFinal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Asignatura)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Asignatura.Descripcion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MatriculaNotaId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

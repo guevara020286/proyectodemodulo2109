@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CBS_CC.Models.Seccion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="col-md-2">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-url="@Url.Action("Save")">Nuevo</button>
+</div>
+<div id="modal-placeholder"></div>
+<div class="col-md-10">
+    <h2>Secciones</h2>
+</div>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                Seccion
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="20%">
+                    <button type="button" data-toggle="modal" data-target="#editModal" data-url="@Url.Action("Save", "Secciones", new { id = item.SeccionId })">Editar</button>
+                </td>
+                <td width="80%">
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CBS_CC.Models.AsignaturaCurso>
+
+@{
+    ViewData["Title"] = "Cursos";
+}
+
+<div class="col-md-6">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-url="@Url.Action("SaveAsignatura", "Cursos", new { cursoId = (int)ViewData["_CursoId"] })">Nuevo</button>
+    <a asp-action="Index" class="btn btn-secondary">Regresar a cursos</a>
+</div>
+<div id="modal-placeholder"></div>
+<div class="col-md-10 text-center">
+    <h2>Asignaturas por curso</h2>
+</div>
+<div class="row">
+    <input type="hidden" id="CursoId" name="CursoId" value="@((int)ViewData["_CursoId"])" />
+    <h4 style="color:blue">Curso: @((string)ViewData["DescripcionCurso"])</h4>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Asignatura)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Asignatura.Descripcion)
+            </td>
+            <td width="20%">
+                <button type="button" data-toggle="modal" data-target="#editModal" data-url="@Url.Action("SaveAsignatura", "Cursos", new { id = item.AsignaturaCursoId, cursoId = item.CursoId })">Editar</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

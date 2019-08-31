@@ -1,0 +1,73 @@
+﻿@model CBS_CC.Models.MatriculaNota
+
+@{
+    ViewData["Title"] = "Notas";
+}
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalTitleLabel">@(((string)ViewData["Operacion"] == "Edit") ? "Modificando " : "Agregando ") notas.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Save">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="MatriculaNotaId" />
+                    <input type="hidden" asp-for="AsignaturaId" />
+                    <div class="row col-md-6"><h4>@Model.Matricula.Estudiante.EstudianteCombo</h4></div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label asp-for="ICorte" class="control-label"></label>
+                            <input asp-for="ICorte" class="form-control" onchange="calcularNotas()" />
+                        </div>
+                        <div class="col-md-2">
+                            <label asp-for="IICorte" class="control-label"></label>
+                            <input asp-for="IICorte" class="form-control" onchange="calcularNotas()"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label asp-for="ISemestre" class="control-label"></label>
+                            <input asp-for="ISemestre" class="form-control" readonly/>
+                        </div>
+                        <div class="col-md-2">
+                            <label asp-for="IIICorte" class="control-label"></label>
+                            <input asp-for="IIICorte" class="form-control" onchange="calcularNotas()"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label asp-for="IVCorte" class="control-label"></label>
+                            <input asp-for="IVCorte" class="form-control" onchange="calcularNotas()" />
+                        </div>
+                        <div class="col-md-2">
+                            <label asp-for="IISemestre" class="control-label"></label>
+                            <input asp-for="IISemestre" class="form-control" readonly/>
+                        </div>
+                    </div>
+                    <p />
+                    <div class="row col-md-6">
+                        <label asp-for="NotaFinal" class="control-label col-md-4"></label>
+                        <input asp-for="NotaFinal" class="form-control col-md-8" readonly/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-save="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function calcularNotas() {
+        var i_corte = document.getElementById("ICorte").value;
+        var ii_corte = document.getElementById("IICorte").value;
+        var iii_corte = document.getElementById("IIICorte").value;
+        var iv_corte = document.getElementById("IVCorte").value;
+        var i_semestre = Math.round(((parseFloat(i_corte) + parseFloat(ii_corte)) * 100.0 / 2.0) / 100);
+        var ii_semestre = Math.round(((parseFloat(iii_corte) + parseFloat(iv_corte)) * 100.0 / 2.0) / 100);
+        document.getElementById("ISemestre").value = i_semestre;
+        document.getElementById("IISemestre").value = ii_semestre;
+        document.getElementById("NotaFinal").value = Math.round(((parseFloat(i_semestre) + parseFloat(ii_semestre)) * 100.0 / 2.0) / 100);
+    }
+</script>

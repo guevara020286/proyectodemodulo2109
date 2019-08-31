@@ -1,0 +1,55 @@
+﻿@model IEnumerable<CBS_CC.Models.Matricula>
+
+@{
+    ViewData["Title"] = "Matricula";
+}
+<h2>Matriculas</h2>
+<p>
+    <a asp-action="Save" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodoLectivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Curso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seccion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodoLectivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estudiante.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seccion.Descripcion)
+            </td>
+            <td>
+                <a asp-action="Save" asp-route-id="@item.MatriculaId">Edit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
